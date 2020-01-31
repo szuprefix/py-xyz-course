@@ -3,9 +3,8 @@
 from __future__ import unicode_literals
 
 from xyz_restful.mixins import IDAndStrFieldSerializerMixin
-from django_szuprefix.utils.datautils import auto_code
+from xyz_util.datautils import auto_code
 from rest_framework import serializers
-from rest_framework.validators import UniqueTogetherValidator
 
 from . import models
 
@@ -14,6 +13,7 @@ class CourseSerializer(IDAndStrFieldSerializerMixin, serializers.ModelSerializer
     category_name = serializers.CharField(source="category", read_only=True)
     class Meta:
         model = models.Course
+        fields = '__all__'
 
     def validate_code(self, value):
         if value is None:
@@ -30,6 +30,7 @@ class CourseNameSerializer(serializers.ModelSerializer):
 class CategorySerializer(IDAndStrFieldSerializerMixin, serializers.ModelSerializer):
     class Meta:
         model = models.Category
+        fields = '__all__'
 
 
 class ChapterSerializer(IDAndStrFieldSerializerMixin, serializers.ModelSerializer):
