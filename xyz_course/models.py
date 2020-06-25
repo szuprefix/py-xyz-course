@@ -8,7 +8,7 @@ class Category(CodeMixin, models.Model):
     class Meta:
         verbose_name_plural = verbose_name = "类别"
 
-    name = models.CharField("名称", max_length=256, unique=True)
+    name = models.CharField("名称", max_length=255, unique=True)
     code = models.CharField("拼音缩写", max_length=64, db_index=True, blank=True, default="")
     create_time = models.DateTimeField("创建时间", auto_now_add=True)
     update_time = models.DateTimeField("修改时间", auto_now=True)
@@ -21,9 +21,11 @@ class Course(CodeMixin, models.Model):
     class Meta:
         verbose_name_plural = verbose_name = "课程"
 
-    name = models.CharField("名称", max_length=256, unique=True)
+    name = models.CharField("名称", max_length=255, unique=True)
     code = models.CharField("拼音缩写", max_length=64, db_index=True, blank=True, default="")
     category = models.ForeignKey(Category, verbose_name=Category._meta.verbose_name, null=True, blank=True, on_delete=models.PROTECT)
+    description = models.CharField("简介", max_length=256, blank=True, default="")
+    outline = models.TextField("大纲", blank=True, default="")
     create_time = models.DateTimeField("创建时间", auto_now_add=True)
     update_time = models.DateTimeField("修改时间", auto_now=True)
     is_active = models.BooleanField("有效", blank=False, default=True)
