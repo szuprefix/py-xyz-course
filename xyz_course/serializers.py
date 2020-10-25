@@ -38,3 +38,11 @@ class ChapterSerializer(IDAndStrFieldSerializerMixin, serializers.ModelSerialize
     class Meta:
         model = models.Chapter
         exclude = ('order_num',)
+
+
+class PassSerializer(IDAndStrFieldSerializerMixin, serializers.ModelSerializer):
+    course_name = serializers.CharField(source="course.name", read_only=True)
+    user_name = serializers.CharField(source="user.get_full_name", read_only=True)
+    class Meta:
+        model = models.Pass
+        exclude = ()

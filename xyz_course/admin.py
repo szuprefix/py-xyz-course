@@ -20,3 +20,8 @@ class CategoryAdmin(admin.ModelAdmin):
 class ChapterAdmin(admin.ModelAdmin):
     list_display = ('name', 'create_time')
     raw_id_fields = ('course',)
+
+@admin.register(models.Pass)
+class PassAdmin(admin.ModelAdmin):
+    list_display = ('course', 'user', 'is_pass', 'create_time')
+    raw_id_fields = ('course', 'user')

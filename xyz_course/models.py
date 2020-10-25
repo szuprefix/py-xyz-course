@@ -54,3 +54,16 @@ class Chapter(CodeMixin, models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Pass(models.Model):
+    class Meta:
+        verbose_name_plural = verbose_name = "通过"
+        unique_together = ('course', 'user')
+        order_with_respect_to = 'course'
+
+    course = models.ForeignKey(Course, verbose_name=Course._meta.verbose_name, related_name="passes",  on_delete=models.PROTECT)
+    user = models.ForeignKey('auth.user', verbose_name='用户', related_name="passes",  on_delete=models.PROTECT)
+    is_pass = models.BooleanField('已通过', blank=True, default=True)
+    create_time = models.DateTimeField("创建时间", auto_now_add=True)
+    update_time = models.DateTimeField("修改时间", auto_now=True)
+
