@@ -5,7 +5,7 @@ from . import models
 from xyz_util import statutils
 
 
-def stats_course(qset=None, measures=None, period=None):
+def stats_course(qset=None, measures=None, period=None, time_field=None):
     if qset is None:
         qset = models.Course.objects.all()
 
